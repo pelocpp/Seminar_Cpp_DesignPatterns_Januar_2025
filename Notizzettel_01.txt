@@ -1,0 +1,274 @@
+================================================
+
+Seminar "Design Pattern Modern C++"
+
+Peter Loos  // "Du"
+
+Entwickler // Trainer
+
+C/C++, Java, c#, Flutter (Mobile)  , Java, (Kotlin)
+
+Beck-to-the-Roots
+
+Guten Morgen
+
+================================================
+
+Online:
+
+2 Tools
+
+== Github
+
+https://github.com/pelocpp
+
+https://github.com/pelocpp/cpp_design_patterns
+
+== Visual Studio
+
+================================================
+
+Erwartungsrunde:
+
+== Was sind meine Erwartungen an dieses Seminar
+
+== Was MUSS drin sein
+
+== Überblick / bestimmte Features 
+
+================================================
+
+Work Sheet Crafter
+
+
+Ziel:
+
+== SW-Architektur
+
+== Was sind Design Pattern
+
+== Den Nebel entfernen ...
+
+== Uni ist lange her ...
+
+== Best Practices
+
+==> C++ 
+
+Historie: Level // Classic C++ // Templates // Lambda  // auto  // Generic Functions
+          STL Algorithmen // STL // ...
+
+          Qt
+
+================================================
+
+Interface:
+
+   == Definiert Methoden
+
+Abstrakte Klasse:
+
+   == Unvollständige Klasse
+   == Abstrakte Klassen können Daten haben
+
+====================================================
+
+Geruch  // Smell
+
+Code smells
+
+====================================================
+
+Templates:
+
+Concept  // Requires
+
+templates
+
+Der Typ "T"
+
+====================================================
+
+Adapter:
+---------
+
+Datenprovider:  JSON
+
+Datenprovider:  XML  ===> JSON
+
+Datenprovider:  Anderes Format  ===> JSON
+
+Template Method Pattern:
+------------------------
+
+Intuitives Pattern:
+
+Games 
+
+Tetris:
+
+8 Figuren:
+
+Bewegen:  nach links // nach rechts // nach unten
+
+Mache einen Schritt: "Das ist grundsätzlich gleich für alle Figuren"   // Homogener Ablauf
+
+Es gibt Unterschiede, die von der jeweiligen Figur bestimmt werden.  // Heterogen Facetten:
+
+=====================================================
+
+Strategy:
+
+Sortieren
+
+Abwärts, Aufwärts, nach Name etc.  // Methode // // Algoprithmus: Austauschbar.
+
+qt:
+
+Visualisierung: 
+
+== Ausführlich
+
+== Schemenhaft // Reduzierte Darstellung
+
+==> Hauptaktivität ==> Parametrierung einer Unteraktivität
+
+                       Austausch einer Unteraktivität
+
+
+========================================================
+
+Beobachtung:
+
+Ein Pattern kann in C++ mit Templates umgesetzt werden.
+
+========================================================
+
+Proxy:
+
+Stellvertreter
+
+Original   <=== Stellvertreter
+
+Gründe // Motivationen
+
+========================================================
+
+Enge Kopplung
+
+Lose Kooplung  <=============
+
+========================================================
+
+Problem mit Resources in C++:
+
+Resources:  Betriebsmittel // Was ein Betriebssystem zur Verfügung stellt.
+
+Socket:   open  // close
+
+          new // delete
+
+          SqlConnection ():    acquire  // close
+
+          Win32:  CreateThread: HANLDE   ===> CloseHandle
+
+
+for (  Socket s  ) {
+
+   if (cond != true) {
+      s.close();  <?=== Dies vergisst man bisweilen
+      break;
+   } 
+
+   // throw  // std::bad_alloc
+
+   s.close();
+}
+
+C++ : Idee:
+
+Man verwende Resourcen Objekte nicht DIREKT, sondern durch ein Hüllenobjekt.
+
+C++:  Konstruktor
+      Destruktor   <=== Wann wird der Destruktor aufgerufen: Am Ende des Scopes
+
+      Aufruf: Deterministisch.
+
+      Hüllenobjekt:
+      =============
+
+C++:  Konstruktor   <=== acquire // Handle in Kontakt zu bringen
+      Destruktor    <=== FREIGABE: close, release
+
+=====================================================================
+
+Factory // Fabrik:
+
+Factory Pattern
+
+Da gibt es viele Varianten // Namen etc. etc.
+
+a) Classic Factory Pattern // Simple Factory
+
+b) Factory Method    // "Factory Pattern"
+
+"Eine Methode zum Erzeugen von Objekten."
+
+=====================================================================
+
+Prototype Pattern – auch als Virtueller Konstruktor bezeichnet.
+
+Beispiel:
+
+Games:  
+
+Game Board  <==== Figuren
+
+Schach:  chessBoard <==== Figuren (Tower, Queen)
+  
+Figure* board [8][8];
+
+Nächsten Zug berechnen:
+
+// Intern: Will den nächsten Zug ausprpobieren:
+
+   Will eine KOPIE vom board [8][8];
+   aber will auch eine Kopie von den FIGUREN.
+
+   board [2][2]  <===  zB Tower  // Figure* // Basisklassentyp
+
+Beobachtung:
+
+Ich habe ein Objekt /// Zeiger: Basisklassenzeiger
+
+Je nach Konstellation werden wir auf KoVarianz hingewiesen:
+
+Frage:
+
+std::shared_from_this
+
+=============================================================
+
+Builder Pattern:
+
+a) Pattern
+
+b) Named Konstruktor // Fluent Programming Style
+
+
+=============================================================
+
+LValue
+
+RValue ???
+
+WEICHE // ÜBERLADEN // COPY - C'TOR  // MOVE - C'TOR
+
+
+... 490   // wird freigegeben
+... 6C0
+
+
+... 030
+
+... 340

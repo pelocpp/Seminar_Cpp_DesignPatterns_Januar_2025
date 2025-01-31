@@ -1,0 +1,338 @@
+================================================
+
+Seminar "Design Pattern Modern C++"
+
+Tag 2: Freitag 
+
+Guten Morgen
+
+================================================
+
+Diskussion:
+-----------
+
+Recap
+-----
+
+Proxy versus Adapter:
+
+Beide verbergen etwas ???
+
+Apapter: Inkompatibel
+
+Proxy: Schnittstelle soll IDENTISCH zum Original sein.
+Stellvertreter  // Transparenter Stellvertreter.
+
+== Bietet Zusatz
+== Kann Zusatz / Proxy verwenden
+== Muss ihn aber nicht verwenden
+
+Client: Nicht erkennt, wen verwendet er  // Sicherheit // Logging
+
+Dieses Original müsste nicht im selben Prozess / auf demselben Rechner sein.
+== Corba  // COM
+
+== Proxy vor Ort // im Prozess: 
+
+Proxy <== Methodenaufruf entgegen: Parameter auspacken (Marshallung)
+      KOMMUNIKATION (Socket)  == Empfänger (Stub) == Unmarshallung == Stack: Zielobjekt aufrufen
+
+Java: RMI
+
+// ===
+
+Kleineres Beispiel:
+
+Virtual Proxy – Eager vs. Lazy Proxy
+
+==> Objekte, die "schwer" sind
+
+==> Wann lade ich diese Objekte tatsächlich:
+
+a) am "Anfang"
+b) On "Demand"
+
+Will dieses Thematik verstecken ??? Stellvertreter
+
+Lazy Proxy: 
+
+========================================================
+
+Template vs. Strategy
+
+
+Template: "Ähnlicher Ablauf" // der auf Teilschritten formulierbar ist.
+
+          Vererbung.
+
+Strategy: Verschiedene Abläufe, möchte diese auswählen (einen Ablauf)
+          und austauschen können.
+
+          Bezahlvorgang: Paypal // Kreditkarte
+
+
+Was könnte bei EINEM Bezahlvorgang für ein Pattern eingesetzt werden:
+
+Template
+
+====================================================================
+
+2 Module // Schichten // SW-Teile hängen voneinander ab:
+
+Ein Modul benötigt Routinen / Methoden eines anderen Moduls.
+
+Kopplung.
+
+Geht das besser:
+
+Rückzug auf ein Interface:
+
+Ein Modul IMPLEMENTIERT das Interface.
+Ein zweites Modul BENUTZT das Interface.
+
+Weitere Vorteile des Interface-Konzepts:
+
+a) Viele Module IMPLEMENTIERT dieses Interface.
+
+b) Ein Modul: Dieses ist ín seiner Realisierung (Entwicklung) "völlig" freigestellt,
+   solange ich das Interface bedienen kann.
+
+Nachteil: Wenn das Interface zu ändern ist.
+
+Smarte Vorgang:
+
+[[ deprecated ]] interface IData {};
+
+ÄNDERN.
+
+Alternative zu ändern:
+
+Neues Interface:
+
+interface IDataEx {};
+
+Klassen // Methoden / Funktionen:
+
+WAS IMPLEMENTIERE ICH IN EINER FUNKTION:
+
+== einen Responsibility
+== einen Concern
+
+Hmmm, habe doch mehrere Concerns: Teilen // Zerlegen.
+
+// =================================================
+
+Fabrik:
+
+Was bringt mir eine "Fabrik"-Patterns:
+
+Trennung von den Details einer Objekt-Erstellung.
+
+Komplexen Objekten:
+
+Vorteil: Ich kann keine Fehler in der Konstruktion solcher Objekte machen.
+
+Fabrik:
+
+Fabrik + Singleton:
+-------------------
+
+Eine Fabrik gibt das Singleton heraus.
+
+class Color ===> new Color (1, 2, 3);
+
+Color c = Color.FromRGB (1, 2, 3);
+
+Icon // Thumbnail:  mutable // immutable  // 
+
+mutable : Veränderbar.  // Icon
+
+immutable: unveränderbar
+
+Immutable:   "Debugger"  // String Pool  // Constant String Pool (Java)
+
+Singleton:  "Debugger"   <=== C++ Compiler (Linker)
+
+
+
+
+// ZENTRAL: EINMAL 
+
+Objekt Registry
+
+
+====================================================================
+
+Virtueller Konstruktor: Was ist das ???
+
+(( Prototyp Pattern ))
+
+Problem der Kopie eines Objekts, von dem ich nur einen BASIS klassenzeiger habe.
+
+====================================================================
+
+Builder Pattern:
+
+Zusammenbauen von komplexen Objekten.
+
+// new ComplexObject();   <=== Mit so etwas kann man nicht arbeiten.
+
+new ComplexObject(1, 2, 3, 4, 5, 6, 7, 8, 9, 0 );  // NO
+
+====================================================================
+
+Facade Pattern:
+
+Sachen verstecken  // Ähnlich zum Proxy:
+
+Proxy versus Facade:
+
+Jan:  Berühmte Facade:    .NET Framework
+
+.NET Framework (C#):   Win32 API  // CreateWindows
+
+Facade:
+
+Ausgangspunkt: 
+
+DLL von einem Dritthersteller (Bibliothek)
+
+Library von einem Dritthersteller
+
+==> KOMPLEX  // extrem breit // schwer einzuarbeiten // aufwendig
+
+"da schreiben wir doch eine Schicht drum herum"
+
+Schicht: Facade
+
+Viele Funktionalitäten des Original-APIs gehen verloren.
+
+=========================================================
+
+interface segregation:
+
+Klassen  :  Enge Kopplung
+
+interface:  Lose Kopplung
+
+=========================================================
+
+Chain-of-Responsibility:
+
+== Ausgangspunkt:
+
+-- Es tritt ein Ereignis ein 
+-- Statusänderung
+
+Frage: Wer wird hierüber / dazu informiert 
+
+       Wer initiiert eine Handlung.
+
+       Kette von Objekten.
+
+       Frage: Wer bearbeitet das Ereignis.
+
+       a) alle
+       b) einige 
+       c) keiner
+
+       i)  Option: Nach der ersten Bearbeitung wird das Event verworfen.
+       ii) Option: Nach der ersten Bearbeitung wird das Event NICHT verworfen.
+
+========================================================================
+
+Command Pattern:
+----------------
+
+Einen Methodenaufruf "abspeichern" und zu einem späteren Zeitpunkt ausführen.
+
+Beispiel:
+
+Viele, viele Aktionen anzustoßen: ==> Pro Aktion ist eine Methode aufzurufen.
+
+i) Das kann Performanz-Engpass ein.
+
+   a) Parallelisierung.
+
+   b) Man kann einen Methodenaufruf "abspeichern" in einer Queue: 
+         == Welches Objekt
+         == welche Methode
+         == welchen Parametern
+
+         Ausführung "später" // die Queue wird Eintrag für Eintrag abgearbeitet.
+         
+Wins:  Undo-Stack // Redo-Stack.
+
+
+ii) Interrupt: ....  ==> ASR (Daten)
+
+========================================================================
+
+Iterator Pattern:
+----------------
+
+Daten eines Containers traversieren ... und pro Element
+eine Aktion ausführen.
+
+C++:  Standard-Container: Iterator ( begin(), end()  )
+
+== Baue ich Container selbst ???
+
+I wouldn't do that :)
+
+== Standard-C++ Iterator Mechanismus.
+
+== IEnumerator // IEnumerable
+
+========================================================================
+
+Mediator:
+
+== Mehrere Objekte / Klassen
+
+== Die können miteinander nicht reden.
+
+== Man kann solche Objekte miteinander verbinden.
+
+========================================================================
+
+Visitor // Besucher:
+--------------------
+
+Beispiel:
+
+Legacy-Software:  ist irgendwie abgeschlossen.
+
+Änderung / Neuen Funktion:
+
+==> Vorschlag: wie kann man eine "neue Funktion / Funktionalität"
+    an eine vorhanden Objekt-Struktur hinzufügen
+
+    // integrieren: 
+
+"Besuchen": Visitor-Pattern.
+
+a) Klassisch
+
+b) std::variant // virtuell vs. statisch // Polymorphismus // No Polymorphismus
+
+i)  Vererbung.
+ii) Generische Programmierung.
+
+===========================================================================
+
+Visitor-Pattern:
+===============
+
+std::variant: Utility
+
+qvariant
+
+Excel  // Sheet:
+
+Zelle // Cell:
+
+==> Zahl, Datum, Währung, Zeichenkette, ... 
+
+std::variant: Kann Werte unterschiedlichen Typs enthalten.
+

@@ -79,6 +79,7 @@ namespace ConceptualExample {
             return m_sharedState;
         }
 
+        // draw a char at position ...
         void operation(const UniqueState& unique_state) const
         {
             std::cout
@@ -107,7 +108,7 @@ namespace ConceptualExample {
          */
         std::string getKey(const SharedState& ss) const
         {
-            return ss.m_brand + "_" + ss.m_model + "_" + ss.m_color;
+            return ss.m_brand + "_" + ss.m_model + "_" + ss.m_color;  // Konkatenation von string'S
         }
 
     public:
@@ -249,13 +250,15 @@ static void test_conceptual_example_02() {
 
     FlyweightFactory factory
     {
+        // Vorbelegung
+
         /* std::initializer_list of Shared State objects
         */
-        {"Chevrolet", "Camaro2018", "pink"},
-        {"Mercedes Benz", "C300", "black"},
-        {"Mercedes Benz", "C500", "red"},
-        {"BMW", "M5", "red"},
-        {"BMW", "X6", "white"}
+        { "Chevrolet",     "Camaro2018", "pink"},
+        { "Mercedes Benz", "C300", "black"},
+        { "Mercedes Benz", "C500", "red"},
+        { "BMW", "M5",     "red"},
+        { "BMW", "X6",     "white"}
     };
 
     factory.listFlyweights();
@@ -271,7 +274,7 @@ static void test_conceptual_example_02() {
     addCarToDatabase(
         factory,
         "James Doe",
-        "CL234IR",
+        "CL987AR",
         "BMW",
         "X1",         // <== this car variant doesn't exist
         "red");

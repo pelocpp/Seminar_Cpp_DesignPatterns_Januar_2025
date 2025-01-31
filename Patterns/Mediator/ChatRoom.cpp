@@ -51,6 +51,7 @@ namespace ChatRoomMediatorPattern
     // -----------------------------------------------------------------------
 
     // Concrete Mediator
+    // kurios: CRTP
     class ChatRoom : public ChatRoomBase, public std::enable_shared_from_this<ChatRoom>
     {
     private:
@@ -61,6 +62,13 @@ namespace ChatRoomMediatorPattern
         virtual void message(const std::string& from, const std::string& to, const std::string& msg) override;
 
         void join(const std::shared_ptr<Person>& person);
+
+        void tueNichts()
+        {
+            // this  // std::shared_ptr
+
+            // std::shared_ptr me{ this };  // NO
+        }
     };
 
     // ===========================================================================
@@ -105,7 +113,7 @@ namespace ChatRoomMediatorPattern
 
     void ChatRoom::join(const std::shared_ptr<Person>& person) {
         // add person to chat room
-        person->setRoom(shared_from_this());
+        person->setRoom(shared_from_this());  // " std::shared_ptr<ChatRoom> me (this); "
         m_people.push_back(person);
 
         // inform all chat room members - including the current one - about a new member

@@ -436,6 +436,185 @@ Modul Konzept: ===> Precompiled Header
 i)  .obj
 ii) .ifc
 
+===============================================================
+
+== Decorator Pattern
+
+Dekorieren ==> "ausschmücken" // "hinzufügen"
+
+Frage:
+
+== Decorator Pattern
+
+---- Umhüllt Methode eines Originalobjekts
+---- Diese Methode gilt es aufzurufen.
+---- Vor und nach dem Aufruf der Zielmethode kann zusätzliche Funktionalität
+     umgesetzt werden.
+---- Aus einer Reihe von Gründen wird diese Funktionalität NICHT am
+     Zielobjekt umgesetzt.
+---- Feature: Das Zielobjekt kann wiederum ein Dekorator sein:
+     Nested use of decorator objects
+---- Die Reihenfolge der "Nested Decorators" ist beliebig bzw. einstellbar.
+---- Die Reihenfolge der "Nested Decorators" ist zur RUNTIME einstellbar.
+
+
+== Proxy Pattern
+
+---- Umhüllt gesamtes Objekt
+---- 1:1 Ersetzung eines Originalobjekts mit Verantwortlichkeiten
+     ( Beispiel: Zielmethode wird NICHT aufgerufen )
 
 ===============================================================
+
+Composite Pattern:
+
+Ausgangspunkt:
+
+a) Es gibt einzelne Objekte:  Ein Produkt
+
+b) Es gibt Gruppen von Objekten: Warenkorb von Produkten.
+
+Ziel:
+
+==> Einzele Objekte und Gruppen von Objekten "gleich" behandeln.
+
+==> Eine Methode an einem einzelen Objekt und an einer Gruppe von Objekten aufrufen.
+
+Best Practice:
+
+
+=======================================================================
+
+== Composite Pattern
+
+== Iterator Pattern
+
+== Visitor Pattern
+
+Unterschied: "Visitor Pattern" vs. "Composite Pattern"
+
+Visitor Pattern:
+
+-- 2 Hierarchien:
+   Hierarchie der Zielobjekte
+   Hierarchie der Besucherobjekte (angepasst auf die Zielobjekte)
+
+Hierarchie der Zielobjekte liegt vor.
+
+Composite Pattern
+
+-- Zielobjekte können in Container zusammengefasst werden.
+
+Wie ließe sich "Composite Pattern" und "Visitor Pattern" 
+in einer Anwendung umsetzen:
+
+Man könnte mit einem Besucher ein Composite durchlaufen.
+
+
+=============================================================
+
+Command Pattern:
+----------------
+
+Einen Methodenaufruf "abspeichern" und zu einem späteren Zeitpunkt ausführen.
+
+Wie ginge es auch anders:
+
+In C++ könnte man Methoden auch anders aufheben:
+
+Hilfsmittel:
+
+std::function <=== General Purpose Wrapper um Methodenaufrufe
+
+Wie bekomme ich Objekt + Methode + Parameter da rein??
+
+a) Lambda
+
+b) std::bind (Hüllenobjekt)
+
+===> std::vector <std::function >
+
+An std::function: operator() kann man die Funktion ausführen.
+
+=========> Nachrichtenwarteschlange
+
+===============================================================
+
+Flyweight:
+
+Einsparen von Speicher.
+
+Idee:  
+
+Ausgangspunkt: Viele, viele Objekte desselben Typs.
+
+Beobachtung: Viele dieser Objekte haben in den Daten gleiche Werte.
+
+"Rausfaktorisieren".
+
+Streng in den Vorgaben  // Detailliert // Detail versessen.
+
+== Shared State // repeating State
+== Unique State (wird aufgehoben ... muss nicht immer aufgehoben werden)
+
+== extrinsischer Zustand
+== Intrinsischer Zustand
+
+
+Fabrik: Cache von Flyweights
+
+std::map 
+
+=========================================================================
+
+Memento Pattern:
+
+Schnappschuss
+
+== Objekte haben State // Zustand
+
+== State ändert sich
+
+== Will einen älteren Zustand an diesem Objekt "restauireren"
+
+// Bankkont (undo):  Es wurde - Fehler - eine  falsche Transaktion durchgeführt.
+
+==> Schnappschüsse ziehen
+==> Schnappschüsse restaurieren
+
+
+// =============================================================
+
+Type Erasure	Type Erasure
+
+Was ist Type Erasure:
+
+"Typ löschen"   // "Typ entfernen"
+
+STL:
+
+std::function : Lambda, Methode eines Objekts, C-Funktion, Aufrufbares Objekt (operator () )
+
+std::variant
+
+std::any 
+
+=====================================================================
+
+int* ptr;
+
+ptr = new int[100];   // 100 int
+
+oder
+
+ptr = new int(123);   // 1  int
+
+==================
+
+delete ptr;   FALSCH
+
+delete[] ptr;  
+
+
+
 

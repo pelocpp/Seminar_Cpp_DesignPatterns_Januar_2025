@@ -84,6 +84,7 @@ namespace ConceptualExampleChainOfResponsibility {
                 std::cout << "Concrete Handler C handles: " << req.getParam() << std::endl;
             }
             else if (m_successor) {
+                std::cout << "Request not handled! " << req.getParam() << std::endl;
                 m_successor->handleRequest(req);
             }
         }
@@ -95,16 +96,16 @@ namespace ConceptualExampleChainOfResponsibility {
      */
     static void clientCode(std::shared_ptr<HandlerBase> handler)
     {
-        std::array<Request, 8> requests =
+        std::array requests =   // Modern C++: CTAD => Class Template Argument Deduction
         {
-            Request{ 7, std::string{ "Req. No.  7"} },
-            Request{25, std::string{ "Req. No. 25"} },
-            Request{17, std::string{ "Req. No. 17"} },
-            Request{21, std::string{ "Req. No. 21"} },
-            Request{18, std::string{ "Req. No. 18"} },
-            Request{ 3, std::string{ "Req. No. 03"} },
-            Request{19, std::string{ "Req. No. 19"} },
-            Request{20, std::string{ "Req. No. 20"} }
+            Request{ 27, std::string{ "Req. No.  27"} }
+            //Request{25, std::string{ "Req. No. 25"} },
+            //Request{17, std::string{ "Req. No. 17"} },
+            //Request{21, std::string{ "Req. No. 21"} },
+            //Request{18, std::string{ "Req. No. 18"} },
+            //Request{ 3, std::string{ "Req. No. 03"} },
+            //Request{19, std::string{ "Req. No. 19"} },
+            //Request{20, std::string{ "Req. No. 20"} }
         };
 
         for (const Request& request : requests) {

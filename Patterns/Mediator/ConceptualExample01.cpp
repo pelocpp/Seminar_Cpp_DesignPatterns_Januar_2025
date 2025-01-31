@@ -115,6 +115,7 @@ namespace ConceptualExample01 {
     {
         ConcreteColleagueA* c1{ new ConcreteColleagueA{} };
         ConcreteColleagueB* c2{ new ConcreteColleagueB{} };
+
         ConcreteMediator* mediator{ new ConcreteMediator(c1, c2) };
 
         std::cout << "Client triggers operation A." << std::endl;

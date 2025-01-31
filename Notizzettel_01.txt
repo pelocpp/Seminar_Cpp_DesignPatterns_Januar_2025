@@ -4,6 +4,9 @@ Seminar "Design Pattern Modern C++"
 
 Peter Loos  // "Du"
 
+peter.loos@gmx.de
+-----------------
+
 Entwickler // Trainer
 
 C/C++, Java, c#, Flutter (Mobile)  , Java, (Kotlin)

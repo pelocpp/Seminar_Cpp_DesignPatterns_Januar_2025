@@ -146,6 +146,7 @@ void test_conceptual_example_02() {
      * but the other decorators as well.
      */
 
+    // Original
     std::shared_ptr<Component> component{ 
         std::make_shared<ConcreteComponent>()
     };
@@ -219,7 +220,7 @@ void test_conceptual_example_03() {
     std::shared_ptr<Component> component{ std::make_shared<ConcreteComponent>() };
 
     // run-time dependent decorator
-    std::shared_ptr<Component> decorator;
+    std::shared_ptr<Component> decorator{};
 
     if (true)   // <== change 'true' to 'false'
     {

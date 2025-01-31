@@ -25,7 +25,7 @@ namespace ConceptualExample01 {
     class Originator
     {
     private:
-        std::string m_state;
+        std::string m_state;   // STATE
 
     public:
         Originator(const std::string& state) : m_state{ state } {}

@@ -58,6 +58,7 @@ namespace DynamicDecoration {
     };
 
     // ---------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------
 
     // corresponds to 'base decorator class'
     class ShapeDecorator : public IShape {

@@ -5,6 +5,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <vector>
 
 namespace PolicyBasedDesign_01 {
 
@@ -73,7 +74,10 @@ namespace PolicyBasedDesign_02 {
     public:
         // c'tor / d'tor
         explicit SmartPtr(T* ptr = nullptr, const DeletionPolicy& policy = DeletionPolicy{})
-            : m_ptr{ ptr }, m_deletionPolicy{ policy } {}
+            : m_ptr{ ptr },
+            m_deletionPolicy{ policy }
+        {
+        }
 
         ~SmartPtr() {
             m_deletionPolicy(m_ptr);
@@ -94,6 +98,8 @@ namespace PolicyBasedDesign_02 {
 
     class Class {};
 
+
+    // aufrufbare Objekte
     template <typename T>
     struct ScalarDeletePolicy {
         void operator()(T* ptr) const {
@@ -145,6 +151,9 @@ namespace PolicyBasedDesign_10 {
     };
 
     static void test_01() {
+
+
+        std::vector<int> numbers;
 
         Logger<LogToConsole> consoleLogger{};
         consoleLogger.log("Important information");

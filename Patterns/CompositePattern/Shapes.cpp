@@ -27,10 +27,11 @@ public:
     }
 };
 
-class Group : public IShape
+class Group : public IShape  // Eine Gruppe ist ein Shape (!), also man kann die Gruppe "zeichen"
 {
 private:
     std::string m_name;
+
     std::vector<std::shared_ptr<IShape>> m_objects;
 
 public:
@@ -85,7 +86,7 @@ void test_shapes()
     subgroup->push(anotherSecondLevelcircle);
 
     // adding sub group to root
-    root->push(subgroup);
+    root->push(subgroup);   // !!!!!!!!!!!!!!!!!!!
 
     root->draw();
 }

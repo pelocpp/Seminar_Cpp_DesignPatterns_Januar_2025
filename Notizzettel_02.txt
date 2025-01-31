@@ -324,6 +324,82 @@ ii) Generische Programmierung.
 Visitor-Pattern:
 ===============
 
+Wann kann ich es einsetzen:
+
+Kann ich es von Anfang an einsetzen ????
+
+a) Liegen meine Objekte / Daten in einer Klassenhierarchie vor?
+
+   Ja.
+
+   Regeln der Vererbung sollten berücksichtigt werden :
+
+   ==> Regel: Ist-ein  // is-a 
+
+   ==> Polymorphismus
+
+   Hmmm, es gibt Anforderungen, die nicht in Einklang mit den Klassen zu bringen sind:
+
+   SRP: Eine Klasse kann nicht um eine Funktionaltät erweitere werden.
+
+b) Meine Objekte / Daten liegen NICHT in einer Klassenhierarchie !!!
+
+   std::variant, std::visit und ein aufrufbares Objekt // Lambda:
+
+===============================================================
+
+Klassenhierarchie:
+------------------
+
+Beobachtung: Gibt es da Nachteile.
+
+Disk. Nachteil: 'virtual' ==> Indirekte Methodenaufruf.
+
+Gibt es eine Alternative zu einer Klassenhierarchie?
+
+    A a;
+    a.func();
+00007FF78BB1A36E  lea         rcx,[a]  
+00007FF78BB1A372  call        A::func (07FF78BADF03Ah)  
+
+    bp ->func();
+00007FF78BB1A3CE  mov         rax,qword ptr [bp]  
+00007FF78BB1A3D2  mov         rax,qword ptr [rax]  
+00007FF78BB1A3D5  mov         rcx,qword ptr [bp]  
+00007FF78BB1A3D9  call        qword ptr [rax]  
+
+
+Gibt es eine Alternative zu einer Klassenhierarchie?
+
+Skizze:
+
+Klassen - KEINE Hierarchie
+
+Fehlende Basisklasse:
+
+Optional: concept // requires ===> Modellierung eines Interface
+
+Der Inhalt des "Hierarchiebaums" wird zur Übersetzungszeit festgelegt.
+
+Option:     // Variadisches Template
+
+using Stock = std::vector<std::variant< TMedia ... >>;
+
+versus
+
+using Stock = std::vector<std::shared_ptr< IMedia Interface >>;
+
+std::visit
+
+price = element.getPrice(); // '.' DIREKTER AUFRUF
+count = element.getCount();
+
+ABER:
+
+Dynamisches kann in std::variant auftauchen.
+
+===============================================================
+
 std::variant: Utility
 
 qvariant
@@ -335,4 +411,31 @@ Zelle // Cell:
 ==> Zahl, Datum, Währung, Zeichenkette, ... 
 
 std::variant: Kann Werte unterschiedlichen Typs enthalten.
+
+Diese müssen VORAB bekannt sein.
+
+==>
+
+STL Container
+
+std::vector<T>                  // homogener Container :   T
+std::vector<std::variant<T>>    // "heterogen" Container :   T
+
+====================================================
+
+Gruppe von Objekten:  Composite Pattern
+
+===============================================================
+
+a) Pimpl
+
+b) C++  Modul Konzept:
+
+Modul Konzept: ===> Precompiled Header
+
+i)  .obj
+ii) .ifc
+
+
+===============================================================
 

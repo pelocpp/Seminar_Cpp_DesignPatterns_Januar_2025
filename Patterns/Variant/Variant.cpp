@@ -12,7 +12,7 @@ namespace VariantDemo {
 
     static void test_01() {
 
-        std::variant<int, double, std::string> var{ 123 };
+        std::variant<int, double, std::string> var { 123 };
 
         // -------------------------------------------------
 
@@ -77,6 +77,7 @@ namespace VariantDemo {
 
         try
         {
+            //auto f = std::get<var.index()>(var);
             auto f = std::get<double>(var);
             std::println("double! ", f);
         }
@@ -95,12 +96,34 @@ namespace VariantDemo {
 
         std::variant<int, double, std::string> var{ 123 };
 
+        // generic lambda
         // using a generic visitor (matching all types in the variant)
-        auto visitor = [](const auto& elem) {
-            std::println("{}", elem);
+        auto visitor = [] (const auto& elem) {
+
+            using T = decltype(elem);
+
+            using TWithoutRef = std::remove_reference<T>::type;
+            using TWithoutRefAndConst = std::remove_const<TWithoutRef>::type;
+
+            if constexpr (std::is_same<TWithoutRefAndConst, int>::value)
+            {
+                std::println("INT: {}", elem);
+            }
+            else if constexpr (std::is_same<TWithoutRefAndConst, double>::value)
+            {
+                std::println("double: {}", elem);
+            }
+            else if constexpr (std::is_same<TWithoutRefAndConst, std::string>::value)
+            {
+                std::println("std::string: {}", elem);
+                std::println("Length: {}", elem.size());
+            }
+            else {
+                std::println("UNBEKANNT: {}", elem);
+            }
         };
 
-        std::visit(visitor, var);
+        std::visit(visitor, var);  // erwünscht ---
 
         var = 123.456;
         std::visit(visitor, var);
@@ -114,7 +137,7 @@ namespace VariantDemo {
     class Visitor
     {
     public:
-        void operator() (int n) {
+        void operator() (int n) {         // Funktor // Callable Object
             std::println("int: {}", n);
         }
 

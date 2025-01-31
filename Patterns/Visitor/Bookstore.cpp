@@ -68,7 +68,10 @@ namespace Bookstore_ExampleClassic {
     class Bookstore
     {
     private:
+        // STL Container: std::vector<std::shared_ptr<IMedia>>;
+
         using Stock = std::vector<std::shared_ptr<IMedia>>;
+        
         using StockList = std::initializer_list<std::shared_ptr<IMedia>>;
 
         Stock m_stock;
@@ -103,7 +106,9 @@ namespace Bookstore_ExampleClassic {
         }
     };
 
-    static void clientCodeClassic_01() {
+    static void clientCodeClassic_01() 
+    {
+        // ALLE Objekte: HEAP
 
         std::shared_ptr<IMedia> cBook{ std::make_shared<Book>("C", "Dennis Ritchie", 11.99, 12) };
         std::shared_ptr<IMedia> javaBook{ std::make_shared<Book>("Java", "James Gosling", 17.99, 21) };
@@ -160,6 +165,8 @@ namespace Bookstore_ExampleModern {
         // getter / setter
         std::string getAuthor() const { return m_author; }
         std::string getTitle() const { return m_title; }
+
+        // wer unterstützt mich bei der Festlegung
         double getPrice() const { return m_price; }
         size_t getCount() const { return m_count; }
     };
@@ -180,6 +187,7 @@ namespace Bookstore_ExampleModern {
         // getter / setter
         std::string getTitle() const { return m_title; }
         std::string getDirector() const { return m_director; }
+
         double getPrice() const { return m_price; }
         size_t getCount() const { return m_count; }
     };
@@ -191,12 +199,16 @@ namespace Bookstore_ExampleModern {
         { m.getCount() } -> std::same_as<size_t>;
     };
 
+    // Variadisches Template
     template <typename ... TMedia>
+
         requires (MediaConcept<TMedia> && ...)
+    
     class Bookstore
     {
     private:
-        using Stock = std::vector<std::variant<TMedia ...>>;
+        using Stock = std::vector<std::variant< TMedia ... >>;
+
         using StockList = std::initializer_list<std::variant<TMedia ...>>;
 
         Stock m_stock;
@@ -220,7 +232,7 @@ namespace Bookstore_ExampleModern {
 
             double total{};
 
-            for (const auto& media : m_stock) {
+            for (const auto& media : m_stock) {  // media: variant
 
                 double price{};
                 size_t count{};
